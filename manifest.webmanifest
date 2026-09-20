@@ -1,0 +1,15 @@
+{
+  "name": "Sentinel-X AI Cyber Defense Platform",
+  "short_name": "Sentinel-X",
+  "description": "AI and cybersecurity platform: Agentic AI, RAG, CNN, LLM and Docker. Designed and developed by Nikhil Chary Sriramoju.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#06131a",
+  "theme_color": "#06131a",
+  "icons": [
+    {"src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png"},
+    {"src": "assets/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}

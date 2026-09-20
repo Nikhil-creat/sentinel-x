@@ -1,0 +1,72 @@
+# Sentinel-X: one command starts the platform.
+#   docker compose up -d --build            core services
+#   docker compose --profile llm up -d      also start the local LLM (Ollama)
+# Open http://localhost:3000 then, in "Docker and deployment", connect the backend with the URL: /
+
+name: sentinel-x
+
+x-hardening: &hardening
+  read_only: true
+  tmpfs: ["/tmp"]
+  cap_drop: ["ALL"]
+  security_opt: ["no-new-privileges:true"]
+  restart: unless-stopped
+
+services:
+  web:                      # nginx serving the 3D dashboard, proxying /api to the gateway
+    build: { context: ., dockerfile: web/Dockerfile }
+    ports: ["3000:8080"]
+    networks: [edge]
+    depends_on: [gateway]
+    <<: *hardening
+
+  gateway:                  # FastAPI: API key, rate limiting, routing
+    build: ./backend/gateway
+    environment:
+      API_KEY: ${API_KEY:-}
+      CORS_ORIGINS: ${CORS_ORIGINS:-}
+      RATE_LIMIT_PER_MIN: ${RATE_LIMIT_PER_MIN:-60}
+    networks: [edge, core]
+    depends_on: [rag, vision, agents]
+    <<: *hardening
+
+  vision:                   # byte-plot malware triage (feature classifier, optional PyTorch CNN)
+    build: ./backend/vision
+    networks: [core]
+    deploy:
+      resources:
+        limits: { cpus: "2", memory: 1g }
+    <<: *hardening
+
+  rag:                      # TF-IDF retrieval with cited answers
+    build: ./backend/rag
+    networks: [core]
+    <<: *hardening
+
+  agents:                   # incident-response agents with approval gate
+    build: ./backend/agents
+    environment:
+      RAG_URL: http://rag:8000
+      VISION_URL: http://vision:8000
+      LLM_URL: ${LLM_URL:-}
+      LLM_MODEL: ${LLM_MODEL:-llama3.2}
+      DRY_RUN: ${DRY_RUN:-true}
+      REQUIRE_APPROVAL: ${REQUIRE_APPROVAL:-true}
+    networks: [core]
+    depends_on: [rag, vision]
+    <<: *hardening
+
+  llm:                      # optional local model; enable with --profile llm, set LLM_URL=http://llm:11434
+    profiles: ["llm"]
+    image: ollama/ollama
+    volumes: ["ollama:/root/.ollama"]
+    networks: [core, egress]
+    restart: unless-stopped
+
+networks:
+  edge: {}
+  core: { internal: true }   # backend services cannot reach the internet
+  egress: {}                 # only the optional LLM needs it, to download models
+
+volumes:
+  ollama: {}

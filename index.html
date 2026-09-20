@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sentinel-X | AI Cyber Defense Platform</title>
+<meta name="description" content="Sentinel-X: an AI and cybersecurity major project combining Agentic AI, RAG, CNN, LLM and Docker, with 3D visualisation. Designed and developed by Nikhil Chary Sriramoju.">
+<meta name="author" content="Nikhil Chary Sriramoju">
+<meta name="theme-color" content="#06131a">
+<meta property="og:title" content="Sentinel-X | AI Cyber Defense Platform">
+<meta property="og:description" content="Agentic AI, RAG, CNN, LLM and Docker in one 3D cybersecurity platform. Designed and developed by Nikhil Chary Sriramoju.">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<nav aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="#top"><i></i>Sentinel-X</a>
+    <div class="links" id="links">
+      <a href="#architecture">Architecture</a>
+      <a href="#globe">Globe</a>
+      <a href="#soc">Console</a>
+      <a href="#vision">CNN</a>
+      <a href="#rag">RAG</a>
+      <a href="#agents">Agents</a>
+      <a href="#tools">Toolkit</a>
+      <a href="#copilot">Copilot</a>
+      <a href="#docker">Docker</a>
+    </div>
+    <div class="nav-tools">
+      <button class="icon-btn" id="palBtn" aria-label="Open command palette">Search <kbd>Ctrl K</kbd></button>
+      <button class="icon-btn" id="themeBtn" aria-label="Switch light or dark theme">Theme</button>
+      <button class="icon-btn" id="installBtn" hidden>Install</button>
+      <button class="menu" id="menuBtn" aria-expanded="false" aria-controls="links">Menu</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <canvas class="hero-canvas" id="heroCanvas" aria-label="3D model of a defended network: nodes, threat packets travelling to a central AI core"></canvas>
+  <div class="wrap">
+    <div class="hero-copy">
+      <h1>Sentinel-X</h1>
+      <p class="tag">AI cyber defense that sees, remembers, reasons and acts.</p>
+      <p class="lead">A CNN inspects suspicious files, a RAG engine recalls threat intelligence, an LLM reasons over both, and a team of agents contains the incident. Every service runs in its own Docker container.</p>
+      <div class="cta">
+        <a class="btn primary" href="#soc">Run the live demos</a>
+        <a class="btn" href="#architecture">Explore the 3D architecture</a>
+      </div>
+      <div class="chips">
+        <span class="chip">Agentic AI</span><span class="chip">RAG</span><span class="chip">CNN</span><span class="chip">LLM</span><span class="chip">Docker</span><span class="chip">MITRE ATT&amp;CK</span>
+      </div>
+      <div class="credit">Designed and developed by
+        <b>NIKHIL CHARY SRIRAMOJU</b>
+      </div>
+    </div>
+  </div>
+  <div class="hero-live">Events analysed in the live console: <b id="heroCount">0</b></div>
+</header>
+
+<main id="main">
+
+<section id="architecture" class="alt">
+  <div class="wrap">
+    <div class="head">
+      <h2>Six layers, one defense loop</h2>
+      <p class="lead">Drag the model to turn it, or pick a layer to see what it does. Data enters at the bottom, is analysed by the CNN and the RAG engine, reasoned over by the LLM, and acted on by the agents at the top.</p>
+    </div>
+    <div class="split">
+      <div class="panel"><canvas class="stack-canvas" id="stackCanvas" aria-label="Interactive 3D stack of the six Sentinel-X layers"></canvas></div>
+      <div>
+        <div class="layers" id="layerList"></div>
+        <div class="panel detail" id="layerDetail" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="globe">
+  <div class="wrap">
+    <div class="head">
+      <h2>Global threat globe</h2>
+      <p class="lead">Simulated attack traffic between twelve monitored sites. Drag to spin the globe, raise the rate to stress the pipeline. The landmasses are stylised, and none of the traffic is real.</p>
+    </div>
+    <div class="split">
+      <div class="panel"><canvas class="globe-canvas" id="globeCanvas" aria-label="3D globe with animated attack arcs between monitored sites"></canvas></div>
+      <div class="panel">
+        <div class="bar"><span><span class="dot"></span><b>Simulated attacks</b></span><span><b id="globeCount">0</b> so far</span></div>
+        <ul class="attacks" id="attacks" aria-live="off"></ul>
+        <div class="range"><label for="globeRate">Attack rate</label><input id="globeRate" type="range" min="1" max="10" value="3"></div>
+        <div class="range" style="padding-top:0"><label class="check"><input type="checkbox" id="globeSpin" checked> Auto-rotate</label></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="soc" class="alt">
+  <div class="wrap">
+    <div class="head">
+      <h2>Live security console</h2>
+      <p class="lead">A simulated stream of security events, triaged the way Sentinel-X would triage them. Trigger a surge to watch the pipeline under load, then export a snapshot.</p>
+    </div>
+    <div class="panel">
+      <div class="bar"><span><span class="dot"></span><b>Event stream</b> from simulated sensors</span><span id="socState">Running</span></div>
+      <div class="counters">
+        <div><b id="cTotal">0</b><span>Events analysed</span></div>
+        <div><b id="cBlocked">0</b><span>Auto-contained</span></div>
+        <div><b id="cEsc">0</b><span>Escalated to analyst</span></div>
+        <div><b id="cRisk">0</b><span>Risk index (0 to 100)</span></div>
+      </div>
+      <canvas id="spark" aria-label="Events per second over the last minute"></canvas>
+      <div class="feed" id="feed" aria-live="off"></div>
+      <div class="controls">
+        <button class="btn primary small" id="surge">Simulate attack surge</button>
+        <button class="btn small" id="pause">Pause stream</button>
+        <button class="btn small" id="exportSoc">Export snapshot (JSON)</button>
+      </div>
+    </div>
+    <div class="head" id="mitre" style="margin-top:56px">
+      <h3 style="font-size:1.6rem">MITRE ATT&amp;CK coverage</h3>
+      <p class="lead">Every event, scan, log finding and incident above lights up the technique it maps to. Warmer cells have been seen more often.</p>
+    </div>
+    <div class="matrix" id="matrix"></div>
+  </div>
+</section>
+
+<section id="vision">
+  <div class="wrap">
+    <div class="head">
+      <h2>CNN lab: see malware as an image</h2>
+      <p class="lead">Security researchers turn a file's bytes into a grayscale picture, then let a convolutional network recognise the texture of each malware family. Generate a sample or drop in any file from your device.</p>
+    </div>
+    <div class="split">
+      <div class="panel pad">
+        <div class="byte-wrap"><canvas id="byteCanvas" width="256" height="256" aria-label="Byte-plot image of the sample"></canvas></div>
+        <div class="row-btns" role="group" aria-label="Sample type">
+          <button class="chip" data-kind="benign" aria-pressed="true">Benign program</button>
+          <button class="chip" data-kind="trojan" aria-pressed="false">Trojan</button>
+          <button class="chip" data-kind="ransomware" aria-pressed="false">Ransomware</button>
+          <button class="chip" data-kind="botnet" aria-pressed="false">Botnet</button>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+          <label class="btn small file">Analyse my own file<input type="file" id="fileIn"></label>
+          <label class="check"><input type="checkbox" id="heat"> Show region heatmap</label>
+        </div>
+        <p class="note">Files are read in your browser. They are only sent anywhere if you connect your own backend below.</p>
+      </div>
+      <div class="panel pad">
+        <h3>Family probabilities</h3>
+        <div class="probs" id="probs"></div>
+        <div class="verdict" id="verdict" aria-live="polite"></div>
+        <div class="stats" id="vstats"></div>
+        <p class="note">The page runs a lightweight feature-based stand-in (byte entropy and repetition patterns) so the demo works offline. With the Docker backend connected, files go to the <code>vision</code> service, which can serve a trained PyTorch CNN.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="rag" class="alt">
+  <div class="wrap">
+    <div class="head">
+      <h2>RAG: answers grounded in threat intelligence</h2>
+      <p class="lead">Ask a security question. Sentinel-X retrieves the most relevant knowledge chunks, writes an answer from them and cites every source. When nothing relevant exists, it says so instead of guessing.</p>
+    </div>
+    <div class="panel pad">
+      <div class="qbox">
+        <input id="q" type="text" placeholder="Ask about an attack, for example: how do I detect ransomware?" aria-label="Security question" autocomplete="off">
+        <button class="btn primary" id="ask">Search knowledge base</button>
+      </div>
+      <div class="chips" id="qchips" style="margin-top:14px"></div>
+      <div id="ans" aria-live="polite"></div>
+      <ul class="src" id="srcs"></ul>
+      <p class="note"><span id="kbInfo"></span> Retrieval uses TF-IDF similarity. The upgrade path is embeddings in a vector database with a reranker. Retrieved text is treated as data, never as instructions.</p>
+    </div>
+  </div>
+</section>
+
+<section id="agents">
+  <div class="wrap">
+    <div class="head">
+      <h2>Agentic AI: from alert to report</h2>
+      <p class="lead">Pick an incident and watch six cooperating agents handle it. The analyst agent really calls the retrieval engine and the CNN above. Containment waits for your approval unless you switch that off.</p>
+    </div>
+    <div class="row-btns" id="scen" role="group" aria-label="Incident scenario"></div>
+    <div class="agents" id="agentChips"></div>
+    <div class="panel">
+      <div class="bar"><span><b>Incident timeline</b></span><label class="check"><input type="checkbox" id="hitl" checked> Require human approval before containment</label></div>
+      <ol class="timeline" id="timeline"><li class="empty">Choose an incident above to start.</li></ol>
+      <div class="gate" id="gate" hidden>
+        <span id="gateText"></span>
+        <button class="btn primary small" id="approve">Approve</button>
+        <button class="btn small" id="deny">Decline</button>
+      </div>
+      <div class="report" id="report" hidden></div>
+    </div>
+    <p class="note">Dry-run mode: actions are simulated and no real system is touched.</p>
+  </div>
+</section>
+
+<section id="tools" class="alt">
+  <div class="wrap">
+    <div class="head">
+      <h2>Security toolkit</h2>
+      <p class="lead">Three working tools that run entirely in your browser: a phishing link checker, a password strength estimator and a log forensics analyser.</p>
+    </div>
+    <div class="panel pad">
+      <div class="tabs" id="toolTabs" role="group" aria-label="Tools">
+        <button class="chip" data-tab="url" aria-pressed="true">Phishing URL scanner</button>
+        <button class="chip" data-tab="pw" aria-pressed="false">Password strength</button>
+        <button class="chip" data-tab="log" aria-pressed="false">Log forensics</button>
+      </div>
+
+      <div class="tabpanel" id="tab-url">
+        <div class="qbox">
+          <input class="field" id="urlIn" type="text" placeholder="Paste a link, for example paypa1-login.verify-account.xyz/signin" aria-label="URL to check" autocomplete="off" spellcheck="false">
+          <button class="btn primary" id="urlBtn">Scan link</button>
+        </div>
+        <div class="chips" style="margin-top:12px">
+          <button class="chip" data-url="https://github.com/Nikhil-creat">Try a safe link</button>
+          <button class="chip" data-url="http://paypa1-login.verify-account.xyz/signin?next=https://evil.com">Try a phishing-style link</button>
+          <button class="chip" data-url="192.168.1.5/login">Try an IP address link</button>
+        </div>
+        <div id="urlOut" style="margin-top:18px" aria-live="polite"></div>
+      </div>
+
+      <div class="tabpanel" id="tab-pw">
+        <input class="field" id="pwIn" type="password" placeholder="Type a sample password to test" aria-label="Password to test" autocomplete="off" spellcheck="false">
+        <label class="check" style="margin-top:10px"><input type="checkbox" id="pwShow"> Show characters</label>
+        <div id="pwOut" style="margin-top:14px" aria-live="polite"></div>
+        <p class="note">Everything stays on this page and nothing is stored. Still, test made-up passwords rather than your real ones. The estimate assumes a fast offline attack of 10 billion guesses per second and is a rough guide only.</p>
+      </div>
+
+      <div class="tabpanel" id="tab-log">
+        <textarea id="logIn" placeholder="Paste web, SSH or Windows event logs here" aria-label="Log lines" spellcheck="false"></textarea>
+        <div class="row-btns">
+          <button class="btn primary small" id="logBtn">Analyse logs</button>
+          <button class="btn small" id="logSample">Load sample log</button>
+          <label class="btn small file">Open a log file<input type="file" id="logFile" accept=".log,.txt,text/plain"></label>
+          <button class="btn small" id="logDl" hidden>Download findings (JSON)</button>
+        </div>
+        <div id="logOut" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="copilot">
+  <div class="wrap">
+    <div class="head">
+      <h2>Sentinel Copilot</h2>
+      <p class="lead">A conversational front end for everything above. Ask a question, paste a link to check, or tell it to run an incident. You can speak to it and have answers read aloud on supported browsers.</p>
+    </div>
+    <div class="panel chat">
+      <div class="msgs" id="msgs" aria-live="polite"></div>
+      <div class="chips" style="padding:0 16px 10px">
+        <button class="chip" data-ask="How do I detect ransomware?">Detect ransomware</button>
+        <button class="chip" data-ask="Is https://secure.google.com.account-verify.top/ safe?">Check a link</button>
+        <button class="chip" data-ask="run phishing">Run phishing incident</button>
+        <button class="chip" data-ask="help">Help</button>
+      </div>
+      <div class="chat-in">
+        <input class="field" id="chatIn" type="text" placeholder="Ask Sentinel Copilot" aria-label="Message" autocomplete="off">
+        <button class="btn small" id="micBtn">Speak</button>
+        <button class="btn small" id="ttsBtn" aria-pressed="false">Read aloud: off</button>
+        <button class="btn primary small" id="chatSend">Send</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="docker" class="alt">
+  <div class="wrap">
+    <div class="head">
+      <h2>Docker: one command, six services</h2>
+      <p class="lead">Each component is a hardened container on segmented networks. Only the web dashboard is exposed. The analysis services sit on an internal network with no internet access.</p>
+    </div>
+    <div class="split">
+      <div>
+        <div class="code">
+          <button class="btn small" id="copy">Copy</button>
+          <pre><code id="compose"></code></pre>
+        </div>
+        <div class="row-btns"><button class="btn small" id="dlCompose">Download docker-compose.yml</button></div>
+        <p class="note">Start it with <code>docker compose up -d --build</code>, then open <code>http://localhost:3000</code>.</p>
+      </div>
+      <div>
+        <div class="panel tablewrap">
+          <table>
+            <thead><tr><th>Service</th><th>Technology</th><th>Network</th><th>Role</th></tr></thead>
+            <tbody id="svcRows"></tbody>
+          </table>
+        </div>
+        <div class="panel pad" style="margin-top:18px">
+          <h3 style="margin-bottom:8px">Connect the backend</h3>
+          <p class="note" style="margin:0 0 12px">Optional. When connected, RAG search and the CNN lab use your Docker services instead of the in-browser versions. Enter <code>/</code> if this page is served by the Docker web container, or a gateway address such as <code>http://localhost:8000</code>.</p>
+          <div class="qbox">
+            <input class="field" id="apiUrl" type="text" placeholder="/ or http://localhost:8000" aria-label="Backend address" autocomplete="off" spellcheck="false">
+            <input class="field" id="apiKey" type="password" placeholder="API key (if set)" aria-label="API key" autocomplete="off">
+            <button class="btn primary small" id="apiTest">Connect</button>
+          </div>
+          <p style="margin-top:12px"><span class="status" id="apiStatus"><i></i>Not connected (running fully in your browser)</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="trust">
+  <div class="wrap">
+    <div class="head">
+      <h2>Built to be trusted</h2>
+      <p class="lead">A security tool that uses AI must be secure and accountable itself. These are the rules the design follows.</p>
+    </div>
+    <div class="two">
+      <div class="panel pad">
+        <h3>Securing the system</h3>
+        <ul class="list">
+          <li><b>Least privilege.</b> Containers run as non-root with a read-only filesystem and no extra capabilities.</li>
+          <li><b>Segmented networks.</b> Analysis services have no route to the internet or the outside world.</li>
+          <li><b>Gateway controls.</b> Optional API key, rate limiting, upload limits and security headers.</li>
+          <li><b>Strict browser policy.</b> The web container sends a content security policy and other hardening headers.</li>
+          <li><b>Audit trail.</b> Every agent step and tool call is recorded in the run timeline.</li>
+        </ul>
+      </div>
+      <div class="panel pad">
+        <h3>Using AI responsibly</h3>
+        <ul class="list">
+          <li><b>Prompt-injection defense.</b> Retrieved text and log lines are data. Tools are allow-listed.</li>
+          <li><b>Human in the loop.</b> Containment needs approval by default and runs in dry-run mode.</li>
+          <li><b>Grounded answers.</b> Claims cite sources, and unsupported questions are refused.</li>
+          <li><b>Explainable verdicts.</b> The CNN lab shows where it looked, and findings list their evidence.</li>
+          <li><b>Privacy first.</b> The browser demos send nothing anywhere, and the LLM can run locally.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="targets">
+      <div><b>&lt; 60 s</b><span>Design target: time from alert to triage</span></div>
+      <div><b>&lt; 5%</b><span>Design target: false-positive rate after tuning</span></div>
+      <div><b>100%</b><span>Design target: answers with source citations</span></div>
+      <div><b>On</b><span>Human approval for containment by default</span></div>
+    </div>
+    <p class="note">These are engineering targets for the full build, not measured results.</p>
+  </div>
+</section>
+
+<section id="roadmap" class="alt">
+  <div class="wrap">
+    <div class="head"><h2>Roadmap</h2></div>
+    <ol class="road">
+      <li><h3>Foundation</h3><p>Log ingestion, event schema, dashboard and the Docker base with hardened containers.</p></li>
+      <li><h3>Intelligence</h3><p>Train the CNN on public malware image datasets and move retrieval to embeddings in a vector database.</p></li>
+      <li><h3>Autonomy</h3><p>Connect a local LLM and agents with tool policies, approval gates and audit logging.</p></li>
+      <li><h3>Hardening</h3><p>Red-team the agents, evaluate accuracy and grounding, and add Kubernetes deployment.</p></li>
+    </ol>
+    <div class="head" style="margin-top:56px"><h3 style="font-size:1.6rem">Next horizon</h3><p class="lead">Planned research directions, not yet built.</p></div>
+    <div class="horizon">
+      <div><h3>Federated learning</h3><p>Train the CNN across sites without sharing raw files.</p></div>
+      <div><h3>Post-quantum readiness</h3><p>Inventory cryptography and prepare migration to quantum-safe algorithms.</p></div>
+      <div><h3>On-device LLM</h3><p>Run a small model in the browser with WebGPU for fully private analysis.</p></div>
+      <div><h3>Edge sensors</h3><p>Deploy lightweight agents on Raspberry Pi and Jetson class devices.</p></div>
+      <div><h3>Attack-path graphs</h3><p>Model assets and permissions as a graph to predict lateral movement.</p></div>
+      <div><h3>Automated red team</h3><p>Continuously attack the agents with prompt-injection suites and score their defenses.</p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="big">Designed and developed by<br>NIKHIL CHARY SRIRAMOJU</div>
+    <div class="lnk">
+      <a class="btn small" href="https://github.com/Nikhil-creat" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn small" href="https://in.linkedin.com/in/nikhil-chary-sriramoju-95041b38a" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <p class="small">Sentinel-X is an educational and portfolio project, released under the MIT licence. The live demos on this page are in-browser simulations and use no real security data. Use any security tooling only on systems you own or are authorised to test. &copy; <span id="year">2026</span> Nikhil Chary Sriramoju.</p>
+  </div>
+</footer>
+
+<dialog id="palette" aria-label="Command palette">
+  <input class="pal-in" id="palIn" type="text" placeholder="Type a command or section name" aria-label="Search commands" autocomplete="off">
+  <ul class="pal-list" id="palList" role="listbox"></ul>
+  <div class="pal-foot">Up and down to choose, Enter to run, Esc to close</div>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script type="text/plain" id="composeSrc">
+# Sentinel-X: one command starts the platform.
+#   docker compose up -d --build            core services
+#   docker compose --profile llm up -d      also start the local LLM (Ollama)
+# Open http://localhost:3000 then, in "Docker and deployment", connect the backend with the URL: /
+
+name: sentinel-x
+
+x-hardening: &hardening
+  read_only: true
+  tmpfs: ["/tmp"]
+  cap_drop: ["ALL"]
+  security_opt: ["no-new-privileges:true"]
+  restart: unless-stopped
+
+services:
+  web:                      # nginx serving the 3D dashboard, proxying /api to the gateway
+    build: { context: ., dockerfile: web/Dockerfile }
+    ports: ["3000:8080"]
+    networks: [edge]
+    depends_on: [gateway]
+    <<: *hardening
+
+  gateway:                  # FastAPI: API key, rate limiting, routing
+    build: ./backend/gateway
+    environment:
+      API_KEY: ${API_KEY:-}
+      CORS_ORIGINS: ${CORS_ORIGINS:-}
+      RATE_LIMIT_PER_MIN: ${RATE_LIMIT_PER_MIN:-60}
+    networks: [edge, core]
+    depends_on: [rag, vision, agents]
+    <<: *hardening
+
+  vision:                   # byte-plot malware triage (feature classifier, optional PyTorch CNN)
+    build: ./backend/vision
+    networks: [core]
+    deploy:
+      resources:
+        limits: { cpus: "2", memory: 1g }
+    <<: *hardening
+
+  rag:                      # TF-IDF retrieval with cited answers
+    build: ./backend/rag
+    networks: [core]
+    <<: *hardening
+
+  agents:                   # incident-response agents with approval gate
+    build: ./backend/agents
+    environment:
+      RAG_URL: http://rag:8000
+      VISION_URL: http://vision:8000
+      LLM_URL: ${LLM_URL:-}
+      LLM_MODEL: ${LLM_MODEL:-llama3.2}
+      DRY_RUN: ${DRY_RUN:-true}
+      REQUIRE_APPROVAL: ${REQUIRE_APPROVAL:-true}
+    networks: [core]
+    depends_on: [rag, vision]
+    <<: *hardening
+
+  llm:                      # optional local model; enable with --profile llm, set LLM_URL=http://llm:11434
+    profiles: ["llm"]
+    image: ollama/ollama
+    volumes: ["ollama:/root/.ollama"]
+    networks: [core, egress]
+    restart: unless-stopped
+
+networks:
+  edge: {}
+  core: { internal: true }   # backend services cannot reach the internet
+  egress: {}                 # only the optional LLM needs it, to download models
+
+volumes:
+  ollama: {}</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/kb.js"></script>
+<script src="js/core.js"></script>
+<script src="js/api.js"></script>
+<script src="js/hero.js"></script>
+<script src="js/stack.js"></script>
+<script src="js/globe.js"></script>
+<script src="js/soc.js"></script>
+<script src="js/vision.js"></script>
+<script src="js/rag.js"></script>
+<script src="js/agents.js"></script>
+<script src="js/tools.js"></script>
+<script src="js/copilot.js"></script>
+<script src="js/docker.js"></script>
+</body>
+</html>

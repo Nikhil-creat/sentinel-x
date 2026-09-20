@@ -1,0 +1,82 @@
+[
+ {
+  "id": "T1566",
+  "title": "Phishing",
+  "text": "Phishing lures users into opening malicious attachments or links, often to steal credentials or deliver malware. Warning signs include look-alike sender domains, urgent wording, mismatched link destinations and unexpected macro-enabled attachments. Mitigate with email filtering, link sandboxing, multi-factor authentication and regular user reporting drills."
+ },
+ {
+  "id": "T1486",
+  "title": "Ransomware (data encrypted for impact)",
+  "text": "Ransomware encrypts files and demands payment for the key. Indicators are mass file renames, new file extensions, deleted shadow copies and sudden spikes in disk writes. Keep offline backups, segment the network, restrict administrative rights and isolate affected hosts immediately."
+ },
+ {
+  "id": "T1190",
+  "title": "SQL injection and exploiting public-facing applications",
+  "text": "SQL injection inserts crafted database commands through unvalidated input fields to read or change data. Look for quote characters, UNION SELECT strings, tautologies like 1=1 and database errors in web logs. Prevent it with parameterized queries, input validation, least-privilege database accounts and a web application firewall."
+ },
+ {
+  "id": "T1110",
+  "title": "Brute force and password spraying",
+  "text": "Brute force and password spraying try many passwords against accounts until one works. Watch for bursts of failed logins from one address, or one failed attempt across many accounts. Enforce multi-factor authentication, account lockout or rate limiting, and block offending addresses."
+ },
+ {
+  "id": "T1071",
+  "title": "Command and control beaconing",
+  "text": "Command-and-control beaconing is malware contacting an attacker server at regular intervals over web protocols. Detect it through fixed-interval connections, rare or newly registered domains and small uniform payloads. Block the domain, inspect DNS logs and isolate the infected host."
+ },
+ {
+  "id": "T1021",
+  "title": "Lateral movement via remote services",
+  "text": "Lateral movement uses remote services such as RDP, SMB or SSH to hop between systems after an initial compromise. Look for logins from unusual workstations, administrative shares accessed at odd hours and new remote sessions between peers. Limit remote access, segment the network and rotate exposed credentials."
+ },
+ {
+  "id": "T1003",
+  "title": "Credential dumping",
+  "text": "Credential dumping extracts password hashes or tokens from memory or system files, for example by reading LSASS process memory. Alerts include unexpected access to LSASS, use of dumping tools and copies of the SAM or NTDS database. Enable credential protection, restrict debug privileges and reset any exposed accounts."
+ },
+ {
+  "id": "T1498",
+  "title": "Denial of service (DDoS)",
+  "text": "Denial-of-service attacks flood a service with traffic or requests until legitimate users cannot reach it. Signs include sudden traffic surges from many sources, half-open connection floods and rising error rates. Use rate limiting, upstream scrubbing or a content delivery network, and autoscaling with connection limits."
+ },
+ {
+  "id": "T1059",
+  "title": "PowerShell and scripting abuse",
+  "text": "Attackers abuse command and scripting interpreters such as PowerShell to run payloads without dropping obvious files. Suspicious signs are encoded commands, download cradles, hidden windows and scripts launched by office applications. Turn on script block logging, use constrained language mode and allow only signed scripts."
+ },
+ {
+  "id": "T1068",
+  "title": "Privilege escalation",
+  "text": "Privilege escalation exploits software flaws or misconfigurations to gain higher permissions than intended. Watch for new administrator accounts, services installed by ordinary users and processes unexpectedly running as system. Patch quickly, apply least privilege and remove unnecessary setuid or admin rights."
+ },
+ {
+  "id": "T1048",
+  "title": "Data exfiltration",
+  "text": "Data exfiltration moves sensitive data out of the organisation, often through cloud storage, DNS tunnelling or compressed archives sent to unknown hosts. Indicators include large outbound transfers, unusual archive creation and rare destination domains. Apply data loss prevention, egress filtering and alert on abnormal upload volumes."
+ },
+ {
+  "id": "LLM01",
+  "title": "Prompt injection against language models",
+  "text": "Prompt injection hides instructions inside user input or retrieved documents so a language model ignores its intended rules. Signs include outputs that reveal system prompts, unexpected tool calls and text telling the model to disregard earlier instructions. Treat retrieved text as data, validate tool arguments, allow-list tools and require human approval for high-impact actions."
+ },
+ {
+  "id": "OWASP-XSS",
+  "title": "Cross-site scripting (XSS)",
+  "text": "Cross-site scripting injects script into a web page so it runs in other users' browsers, stealing sessions or performing actions on their behalf. Look for script tags, event handlers such as onerror and encoded angle brackets in request parameters and logs. Encode output by context, set a strict content security policy and use HttpOnly cookies."
+ },
+ {
+  "id": "OWASP-PT",
+  "title": "Path traversal",
+  "text": "Path traversal uses sequences such as ../ to read files outside the intended directory, for example configuration files or password stores. Log entries show repeated dot-dot segments, encoded variants and requests for system files. Canonicalise and validate paths, use allow-lists of files and run services with minimal file permissions."
+ },
+ {
+  "id": "T1195",
+  "title": "Supply chain compromise",
+  "text": "Supply chain compromise tampers with software dependencies, build systems or updates so that malicious code arrives through a trusted channel. Warning signs include unexpected new dependencies, changed checksums, typosquatted package names and build steps that contact unknown hosts. Pin and verify dependencies, generate a software bill of materials, sign artifacts and scan images in CI."
+ },
+ {
+  "id": "AI-DEEPFAKE",
+  "title": "Deepfake-enabled social engineering",
+  "text": "Attackers use cloned voices or synthetic video to impersonate executives and pressure staff into urgent payments or credential sharing. Warning signs include unusual urgency, requests to bypass normal approval and callers refusing a call-back on a known number. Verify through a second channel, require multi-person approval for transfers and agree on verification phrases for sensitive requests."
+ }
+]

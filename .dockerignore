@@ -1,0 +1,6 @@
+backend
+docs
+.git
+.github
+*.md
+docker-compose.yml
