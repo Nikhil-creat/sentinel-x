@@ -1,6 +1,14 @@
 # Sentinel-X: AI Cyber Defense Platform
 
-> **Designed and developed by NIKHIL CHARY SRIRAMOJU**
+## **Designed and developed by
+# **NIKHIL CHARY SRIRAMOJU**
+BTech CSE (Final Year)
+
+- GitHub: [Nikhil-creat](https://github.com/Nikhil-creat)
+- LinkedIn: [nikhil-chary-sriramoju](https://in.linkedin.com/in/nikhil-chary-sriramoju-95041b38a)
+- Email: sriramojunikhil66@gmail.com
+- Instagram: [@nikhil__sriramoju](https://www.instagram.com/nikhil__sriramoju)
+- Facebook: [Profile](https://www.facebook.com/profile.php?id=100079201124141)
 
 Sentinel-X is a major project that combines **AI/ML and cybersecurity**. A **CNN** inspects suspicious files, a **RAG** engine recalls threat intelligence, an **LLM** reasons over both, and **agentic AI** contains the incident, all running as **Docker** services and presented in a responsive **3D** dashboard.
 
@@ -117,16 +125,3 @@ See [SECURITY.md](SECURITY.md). Use security tooling only on systems you own or 
 ## Licence
 
 MIT. Copyright (c) 2026 NIKHIL CHARY SRIRAMOJU.....
-
-## Author
-
-**NIKHIL CHARY SRIRAMOJU**
-BTech CSE (Final Year)
-
-- GitHub: [Nikhil-creat](https://github.com/Nikhil-creat)
-- LinkedIn: [nikhil-chary-sriramoju](https://in.linkedin.com/in/nikhil-chary-sriramoju-95041b38a)
-- Email: sriramojunikhil66@gmail.com
-- Instagram: [@nikhil__sriramoju](https://www.instagram.com/nikhil__sriramoju)
-- Facebook: [Profile](https://www.facebook.com/profile.php?id=100079201124141)
-
-  
